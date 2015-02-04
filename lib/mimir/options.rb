@@ -19,10 +19,6 @@ module Mimir
       end
       skip_false_options
       skip_empty_arguments
-      extract_class
-      extract_command
-      # require "pp"
-      # pp @options
       @options
     end
 

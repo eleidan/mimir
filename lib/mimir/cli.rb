@@ -13,7 +13,7 @@ module Mimir
     end
 
     def run
-      puts @options
+      puts @usage if @options.empty?
     end
   end
 end
