@@ -7,7 +7,7 @@ Usage:
   <%= program %> -v | --version
 
 Commands:
-<% cmds.sort_by { |name, description| name }.each do |name, description| -%>
+<% commands.sort_by { |name, description| name }.each do |name, description| -%>
   <%= "%-16s" % name %>  <%= description %>
 <% end -%>
 

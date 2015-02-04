@@ -3,9 +3,10 @@ require_relative 'options'
 
 module Mimir
   class CLI
-
+    attr_accessor :cmds, :program
     def initialize(argv)
-      Mimir::Options::new(argv)
+      cmds     = {dump: 'description', diff: 'description'}
+      Mimir::Options.new(argv).parse()
     end
 
     def run

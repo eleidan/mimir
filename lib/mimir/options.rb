@@ -1,51 +1,35 @@
 # coding: utf-8
 require "docopt"
-require "erb"
 require_relative "version"
+require_relative "usage"
 
 
 module Mimir
   class Options
-    attr_accessor :cmds, :program
     def initialize(argv)
-      @program  = "mimir"
-      @cmds     = {dump: 'description', diff: 'description'}
-      usage_file = File.expand_path('commands/usage.erb', File.dirname(__FILE__))
-      @doc = ERB.new(File.read(usage_file), nil, '-').result(binding())
-      @doc = render_usage(usage_file)
-      # puts @doc
-      @command = ''
-      @objects = []
-      @options = nil
-      # Get hash of options
-      # @options.default = false
+      @options  = nil
+      @argv     = argv
+    end
 
+    def parse()
+      doc = Usage.new().render()
       begin
-        @options = Docopt::docopt(@doc, argv: argv, version: VERSION)
+        @options = Docopt::docopt(doc, argv: @argv, version: VERSION)
       rescue => e
         puts e.message
         exit 1
       end
-      # parse
-      # validate
-      # require "pp"
-      # pp @options
-      # @options
-    end
-
-    def render_usage(file)
-      ERB.new(File.read(file), nil, '-').result(binding())
-    end
-
-
-  private
-
-    def parse()
       skip_false_options
       skip_empty_arguments
       extract_class
       extract_command
+      # require "pp"
+      # pp @options
+      @options
     end
+
+  private
+
 
     def skip_false_options()
       @options.reject! {|k,v| v === false}
