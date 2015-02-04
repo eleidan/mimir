@@ -1,0 +1,16 @@
+Introspection utility for Ruby language.
+
+Usage:
+  <%= program %> [command] [options]
+  <%= program %> help [command]
+  <%= program %> -h | --help
+  <%= program %> -v | --version
+
+Commands:
+<% cmds.sort_by { |name, description| name }.each do |name, description| -%>
+  <%= "%-16s" % name %>  <%= description %>
+<% end -%>
+
+Options:
+  -h, --help        Show help.
+  -v, --version     Show version.
