@@ -5,12 +5,12 @@ module Mimir
   class Usage
     attr_accessor :program, :commands
     def initialize(params={})
-      params[:name]     ||= 'mimir'
+      params[:program]  ||= 'mimir'
       params[:commands] ||= {}
       params[:file] ||= File.expand_path(File.join('commands','usage.erb'), \
                                          File.dirname(__FILE__))
 
-      @program  = params[:name]
+      @program  = params[:program]
       @commands = params[:commands]
       @file     = params[:file]
     end

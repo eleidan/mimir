@@ -1,17 +1,19 @@
 # coding: utf-8
 require_relative 'options'
+require_relative 'usage'
 
 module Mimir
   class CLI
-    attr_accessor :cmds, :program
     def initialize(argv)
-      cmds     = {dump: 'description', diff: 'description'}
-      Mimir::Options.new(argv).parse()
+      values = {}
+      values[:program]  = 'mimir'
+      values[:commands] = {dump: 'description', diff: 'description'}
+      @usage    = Mimir::Usage.new(values).render()
+      @options  = Mimir::Options.new(argv, @usage).parse()
     end
 
     def run
-
+      puts @options
     end
-
   end
 end

@@ -1,20 +1,18 @@
 # coding: utf-8
 require "docopt"
 require_relative "version"
-require_relative "usage"
-
 
 module Mimir
   class Options
-    def initialize(argv)
+    def initialize(argv, usage)
       @options  = nil
       @argv     = argv
+      @usage    = usage
     end
 
     def parse()
-      doc = Usage.new().render()
       begin
-        @options = Docopt::docopt(doc, argv: @argv, version: VERSION)
+        @options = Docopt::docopt(@usage, argv: @argv, version: VERSION)
       rescue => e
         puts e.message
         exit 1
