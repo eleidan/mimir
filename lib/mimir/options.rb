@@ -23,30 +23,12 @@ module Mimir
     end
 
   private
-
-
     def skip_false_options()
       @options.reject! {|k,v| v === false}
     end
 
     def skip_empty_arguments()
       @options.reject! {|k,v| v === nil}
-    end
-
-    def extract_class()
-      @objects = @options.delete('<class>')
-    end
-
-    def extract_command()
-      @command = @options.reject {|k,v| k.start_with?('-')}.keys[0]
-      @options.delete(@command)
-    end
-
-    def extract_options()
-      @options.reject! {|k,v| k.start_with?('-')}
-    end
-
-    def validate()
     end
   end
 end
