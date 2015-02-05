@@ -13,7 +13,7 @@ Feature: Command Line Interface
 
     Scenario: Get version of the application
       When I run `mimir --version`
-      Then the output `mimir --version` should give the current application version
+      Then the output should be the current application version
 
     @announce
     Scenario: Issue "help" command without any arguments
