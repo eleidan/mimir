@@ -1,8 +1,8 @@
-Get list of all objects in provided class.
+Get list of common methods in provided classes.
 
 Usage:
-  <%= values[:program] %> dump <class> [-f <format>]
-  <%= values[:program] %> dump -h | --help
+  <%= values[:program] %> <%= values[:command] %> <class>... [-f <format>]
+  <%= values[:program] %> <%= values[:command] %> -h | --help
 
 Options:
   -f, --format <format>       How to format results (default: plain).
@@ -11,6 +11,5 @@ Options:
                                 plain  Provide results as plain text.
   -o, --output                Set file for the results.
   -p, --private               Sets to show only private methods.
-      --variables             Sets to show only variables.
 
   -h, --help                  Show help.

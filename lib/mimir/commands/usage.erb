@@ -1,13 +1,13 @@
 Introspection utility for Ruby language.
 
 Usage:
-  <%= program %> [command] [options]
-  <%= program %> help <command>
-  <%= program %> -h | --help
-  <%= program %> -v | --version
+  <%= values[:program] %> [command] [options]
+  <%= values[:program] %> help <command>
+  <%= values[:program] %> -h | --help
+  <%= values[:program] %> -v | --version
 
 Commands:
-<% commands.sort_by { |name, description| name }.each do |name, description| -%>
+<% values[:commands].sort_by { |name, description| name }.each do |name, description| -%>
   <%= "%-16s" % name %>  <%= description %>
 <% end -%>
 
