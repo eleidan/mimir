@@ -1,36 +1,35 @@
 # coding: utf-8
-require "docopt"
+require 'docopt'
+require_relative 'version'
 
 module Mimir
   class Options
-    def initialize(argv, usage)
-      @options  = nil
-      @argv     = argv
-      @usage    = usage
+    def initialize(usage, options={})
+      defaults = {argv: ARGV, help: true}
+      @options = defaults.merge(options)
+      @usage   = usage
+      @result  = nil
     end
 
     def parse()
       begin
-        @options = Docopt::docopt(@usage, \
-                                  argv: @argv, \
-                                  version: VERSION, \
-                                  help: false)
+        @result = Docopt::docopt(@usage, @options)
       rescue Docopt::Exit => e
         puts e.message
         exit 0
       end
       skip_false_options
       skip_empty_arguments
-      @options
+      @result
     end
 
   private
     def skip_false_options()
-      @options.reject! {|k,v| v === false}
+      @result.reject! {|k,v| v === false}
     end
 
     def skip_empty_arguments()
-      @options.reject! {|k,v| v === nil}
+      @result.reject! {|k,v| v === nil}
     end
   end
 end

@@ -15,9 +15,12 @@ Feature: Command Line Interface
       When I run `mimir --version`
       Then the output should be the current application version
 
-    @announce
     Scenario: Issue "help" command without any arguments
       When I run `mimir help`
+      Then the output should contain "Usage:"
+
+    Scenario: Issue "help" command with the '-h' argument
+      When I run `mimir help -h`
       Then the output should contain "Print information about the command use"
 
     Scenario: Issue "dump" command with 'String' class
