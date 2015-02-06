@@ -23,6 +23,14 @@ Feature: Command Line Interface
       When I run `mimir help -h`
       Then the output should contain "Print information about the command use"
 
-    Scenario: Issue "dump" command with 'String' class
-      When I run `mimir dump String`
-      Then I should get output of the list of methods "String" class
+    Scenario: Issue "help" command with the 'dump' argument
+      When I run `mimir help dump`
+      Then the output should contain "Get list of all objects in provided class"
+
+    Scenario: Issue "dump" command without any arguments
+      When I run `mimir dump`
+      Then the output should contain "Usage:"
+
+    # Scenario: Issue "dump" command with 'String' class
+    #   When I run `mimir dump String`
+    #   Then I should get output of the list of methods "String" class
