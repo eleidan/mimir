@@ -1,3 +1,3 @@
 require 'mimir/usage'
 
-puts "HELP", ARGV
+puts "DUMP", ARGV

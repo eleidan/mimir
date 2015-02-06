@@ -1,8 +1,10 @@
-Print information about the command use.
+Get list of all objects in provided class.
 
 Usage:
-  <%= program %> help [command]
+  <%= program %> dump <class>
 
 Options:
-  -h, --help        Show help.
-  -v, --version     Show version.
+  -f, --format      Format of the results.
+  -o, --output      Set file for the results.
+  -p, --private     Sets to show only private methods.
+      --variables   Sets to show only methods.

@@ -18,7 +18,7 @@ Feature: Command Line Interface
     @announce
     Scenario: Issue "help" command without any arguments
       When I run `mimir help`
-      Then the output should contain "Usage:"
+      Then the output should contain "Print information about the command use"
 
     Scenario: Issue "dump" command with 'String' class
       When I run `mimir dump String`

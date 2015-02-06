@@ -1,6 +1,5 @@
 # coding: utf-8
 require "docopt"
-require_relative "version"
 
 module Mimir
   class Options
@@ -12,10 +11,13 @@ module Mimir
 
     def parse()
       begin
-        @options = Docopt::docopt(@usage, argv: @argv, version: VERSION)
-      rescue => e
+        @options = Docopt::docopt(@usage, \
+                                  argv: @argv, \
+                                  version: VERSION, \
+                                  help: false)
+      rescue Docopt::Exit => e
         puts e.message
-        exit 1
+        exit 0
       end
       skip_false_options
       skip_empty_arguments
