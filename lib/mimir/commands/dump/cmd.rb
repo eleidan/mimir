@@ -1,8 +1,8 @@
 # coding: utf-8
-require 'mimir/usage'
-require 'mimir/options'
+require 'mimir/command'
+require 'mimir/services'
 
-usage_file = File.expand_path(File.join('usage.erb'), File.dirname(__FILE__))
-usage = Mimir::Usage.new(file: usage_file).render()
-puts options = Mimir::Options.new(usage).parse()
-puts usage if options.empty?
+include Mimir::Services
+Mimir::Command.new(__FILE__) do |options, usage|
+  puts get_all_methods(options['<class>']) if options.has_key?('<class>')
+end
