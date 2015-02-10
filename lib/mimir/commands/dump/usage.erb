@@ -1,7 +1,7 @@
 Get list of all objects in provided class.
 
 Usage:
-  <%= values[:program] %> dump <class> [-f <format>]
+  <%= values[:program] %> dump <class> [options]
   <%= values[:program] %> dump --help
 
 Options:
@@ -9,8 +9,7 @@ Options:
                               Available formats:
                                 json   Provide results as JSON.
                                 plain  Provide results as plain text.
-  -o, --output                Set file for the results.
-  -p, --private               Sets to show only private methods.
-      --variables             Sets to show only variables.
+  -o, --output                Set file for the results.        [Not implemented]
+      --pretty                Display in human-readable format.
 
-      --help                  Show help.
+      --help                  Show this help end exit.

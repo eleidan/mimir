@@ -8,7 +8,7 @@ module Mimir
       defaults = {argv: ARGV, help: true}
       @options = defaults.merge(options)
       @usage   = usage
-      @result  = nil
+      @result  = {}
     end
 
     def parse()
@@ -22,6 +22,11 @@ module Mimir
       skip_empty_arguments
       @result
     end
+
+    def self.get_option(options, option)
+      options[option] if options.has_key?(option)
+    end
+
 
   private
     def skip_false_options()

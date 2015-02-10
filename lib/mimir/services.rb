@@ -2,16 +2,31 @@
 
 module Mimir
   module Services
-    def get_all_methods(cls)
-      eval(cls).methods.sort
+    require 'set'
+    SUSPECTED = '/\\[]{}~`!@#$%^&*()_+,.;\'"?'.chars.to_set
+
+    def get_class_public_methods(cls)
+      return [] unless valid?(cls)  # TODO: Use custom Exception.
+      eval(cls).public_methods(false).sort
     end
 
-    def get_private_methods(cls, all=false)
-      eval(cls).private_methods(all).sort
+    def get_class_protected_methods(cls)
+      return [] unless valid?(cls)  # TODO: Use custom Exception.
+      eval(cls).protected_methods(false).sort
     end
 
-    def get_instance_methods(cls, all=false)
-      eval(cls).instance_methods(all).sort
+    def get_class_private_methods(cls)
+      return [] unless valid?(cls)  # TODO: Use custom Exception.
+      eval(cls).private_methods(false).sort
     end
+
+    def valid?(input)
+      if input.chars.to_set.intersect?(SUSPECTED)
+        $stderr.puts 'Provided data looks strange!'
+      else
+        true
+      end
+    end
+
   end
 end
