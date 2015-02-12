@@ -1,6 +1,6 @@
 # coding: utf-8
 require 'json'
-require_relative 'usage'
+require_relative 'view/usage'
 require_relative 'version'
 
 module Mimir
@@ -10,7 +10,7 @@ module Mimir
       values[:program]  = 'mimir'
       values[:commands] = get_commands()
       @commands = values[:commands].keys()
-      @usage    = Mimir::Usage.new(values).render()
+      @usage    = Mimir::View::Usage.new(values).render()
     end
 
     def run
@@ -44,9 +44,6 @@ module Mimir
       rescue => e
         puts e.message
       end
-    end
-    def validate_args()
-
     end
   end
 end

@@ -3,8 +3,8 @@ Introspection utility for Ruby language.
 Usage:
   <%= values[:program] %> [command] [options]
   <%= values[:program] %> help <command>
-  <%= values[:program] %> -h | --help
-  <%= values[:program] %> -v | --version
+  <%= values[:program] %> --help
+  <%= values[:program] %> --version
 
 Commands:
 <% values[:commands].sort_by { |name, description| name }.each do |name, description| -%>
@@ -12,5 +12,5 @@ Commands:
 <% end -%>
 
 Options:
-  -h, --help        Show help.
+      --help        Show this help end exit.
       --version     Show application version end exit.

@@ -1,5 +1,6 @@
 # coding: utf-8
-require_relative 'usage'
+require_relative 'view/usage'
+require_relative 'view/result'
 require_relative 'options'
 
 module Mimir
@@ -20,7 +21,7 @@ module Mimir
     end
 
     def render_usage
-      @usage_content = Mimir::Usage.new(file: @usage_file_path).render()
+      @usage_content = Mimir::View::Usage.new(file: @usage_file_path).render()
     end
     def parse_options()
       @command_options = Mimir::Options.new(@usage_content).parse()
