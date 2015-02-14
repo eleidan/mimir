@@ -1,7 +1,8 @@
 # coding: utf-8
 require 'json'
-require_relative 'view/usage'
 require_relative 'version'
+require_relative 'command'
+require_relative 'view/usage'
 
 module Mimir
   class CLI
@@ -32,8 +33,9 @@ module Mimir
         puts @usage
         exit 1
       end
-      command_file = File.join( File.dirname(__FILE__), 'commands', command, 'cmd.rb')
-      system(['ruby', '-Ilib', command_file, ARGV].join(' '))
+      Mimir::Command.new(ARGV).run
+      # command_file = File.join( File.dirname(__FILE__), 'commands', command, 'cmd.rb')
+      # system(['ruby', '-Ilib', command_file, ARGV].join(' '))
     end
 
     def get_commands()
