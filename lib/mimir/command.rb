@@ -22,7 +22,7 @@ module Mimir
     end
     def run
       require @command_file_path
-      eval("#{@command}(@command_options)")
+      # eval("#{@command}(@command_options)")
     end
 
     def locate_usage_file(file)
