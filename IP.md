@@ -16,6 +16,7 @@ This document describes possible approaches for solving problems listed above.
 ##  Introduction
 One of the commonly used ways of interaction with computers is a CLI.
 Mainly, it works as follows:
+
 1.  User opens a terminal.
 1.  User issues a command.
 1.  The command prints results.
