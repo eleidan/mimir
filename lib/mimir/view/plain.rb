@@ -5,9 +5,21 @@ module Mimir
   module View
 
     class Plain < Base
-      def render(file='')
-        # super(file)
-        # ERB.new(File.read(file), nil, '-').result(binding)
+      def initialize(params={})
+        super
+        @values = @options[:data]
+      end
+
+      def render()
+        name = 'output_ugly.txt.erb'
+        name = 'output_pretty.txt.erb' if @options['--pretty'] == true
+        super(compose_template_file_path(name))
+      end
+
+
+    private
+      def compose_template_file_path(name)
+        File.join(@options[:path], name)
       end
     end
 

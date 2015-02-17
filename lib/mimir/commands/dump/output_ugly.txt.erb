@@ -1,0 +1,9 @@
+<% values.each_pair do |klass, scopes| -%>
+<%=klass %>
+<% scopes.each_pair do |scope, methods| -%>
+  <%=scope %> [<%=methods.size %>]
+<% methods.each do |method| -%>
+    - <%=method %>
+<% end -%>
+<% end -%>
+<% end -%>

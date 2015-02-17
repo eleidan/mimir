@@ -10,22 +10,27 @@ module Mimir
       @command_name = args[0]
       @location = locate_myself()
       @usage_file_path = ''
-      @command_file_path = dispatch()
       @usage_content = 'No content.'
       @command_options = {}
+      locate_command_path
+      locate_command_file
       locate_usage_file(@command_file_path)
       render_usage()
       parse_options()
     end
 
     def run
-      require @command_file_path
+      require @command_file
+      options = {path: @command_file_path}
       result = command(@command_options)
-      Mimir::View::Result.new(result).render() unless result.empty?
+      # TODO: Use proper exception, test this moment
+      raise 'NOT A HASH!' unless result.is_a?(Hash)
+      options.merge!(result)
+      Mimir::View::Result.new(options).render() unless result.empty?
     end
 
     def locate_usage_file(file)
-      @usage_file_path = File.expand_path('usage.erb', File.dirname(file))
+      @usage_file_path = File.join(@command_file_path, 'usage.erb')
     end
     def render_usage
       @usage_content = Mimir::View::Usage.new(file: @usage_file_path).render()
@@ -37,7 +42,10 @@ module Mimir
 
 
     def locate_command_file
-      File.join(@location, %W(commands #{@command_name} cmd.rb))
+      @command_file = File.join(@command_file_path, 'cmd.rb')
+    end
+    def locate_command_path
+      @command_file_path = File.join(@location, %W(commands #{@command_name}))
     end
 
     def dispatch

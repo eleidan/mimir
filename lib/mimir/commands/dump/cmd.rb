@@ -2,7 +2,6 @@ require 'mimir/services'
 
 include Mimir::Services
 
-# Mimir::Command.new(__FILE__) do |args, usage|
 def command(opts)
   defaults  = {'--format' => 'plain'}
   options   = defaults.merge(opts)
@@ -10,9 +9,12 @@ def command(opts)
   # the_format  = Mimir::Options::get_option(options,'--format').downcase
   # Refactoring TODO: extract method for lines below
   methods = {}
-  methods['public methods'] = get_class_public_methods(the_class)
-  methods['protected methods'] = get_class_protected_methods(the_class)
-  methods['private methods'] = get_class_private_methods(the_class)
+  tmp = get_class_public_methods(the_class)
+  methods['public methods']     = tmp if tmp.size > 0
+  tmp = get_class_protected_methods(the_class)
+  methods['protected methods']  = tmp if tmp.size > 0
+  tmp = get_class_private_methods(the_class)
+  methods['private methods']    = tmp if tmp.size > 0
   # Refactoring TODO: extract method for lines below
   result  = {}
   result.store(the_class, methods)

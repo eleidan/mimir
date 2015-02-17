@@ -5,7 +5,7 @@ module Mimir
   module View
 
     class Base
-      attr_accessor :values
+      attr_reader :values
       def initialize(params={})
         defaults  = {'--format' => 'plain'}
         defaults.store('--pretty', 'false')
