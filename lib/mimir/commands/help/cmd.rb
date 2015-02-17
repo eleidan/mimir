@@ -5,4 +5,5 @@ def command(options)
   # Get path to the command
   commands_usage_file = File.join(usage_file.split(File::SEPARATOR)[0..-3], command_name, 'usage.erb')
   puts usage = Mimir::View::Usage.new(file: commands_usage_file, command: command_name).render()
+  return Hash.new
 end

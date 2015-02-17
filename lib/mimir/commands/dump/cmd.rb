@@ -1,12 +1,11 @@
-# coding: utf-8
-require 'mimir/command'
 require 'mimir/services'
 
 include Mimir::Services
 
-Mimir::Command.new(__FILE__) do |args, usage|
+# Mimir::Command.new(__FILE__) do |args, usage|
+def command(opts)
   defaults  = {'--format' => 'plain'}
-  options   = defaults.merge(args)
+  options   = defaults.merge(opts)
   the_class = Mimir::Options::get_option(options,'<class>').strip
   # the_format  = Mimir::Options::get_option(options,'--format').downcase
   # Refactoring TODO: extract method for lines below
@@ -20,6 +19,7 @@ Mimir::Command.new(__FILE__) do |args, usage|
   # Inject data
   options[:data] = result
   # puts options[:data]
-  output  = Mimir::View::Result.new(options).render()
-  puts output
+  # output  = Mimir::View::Result.new(options).render()
+  # puts output
+  return options
 end

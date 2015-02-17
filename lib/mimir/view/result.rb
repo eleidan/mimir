@@ -16,13 +16,13 @@ module Mimir
         else
           render_plain
         end
-
+        puts result
       end
 
     private
       def render_json
-        require_relative 'json'
-        Mimir::View::Json.new(@options).render
+        require_relative 'jsonview'
+        Mimir::View::JsonView.new(@options).render
       end
       def render_plain
         require_relative 'plain'

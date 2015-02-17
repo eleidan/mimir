@@ -5,7 +5,7 @@ require_relative 'options'
 
 module Mimir
   class Command
-    attr_reader :command_options, :usage_content
+    # attr_reader :command_options, :usage_content
     def initialize(args)
       @command_name = args[0]
       @location = locate_myself()
@@ -19,14 +19,9 @@ module Mimir
     end
 
     def run
-      result = Hash.new
       require @command_file_path
-      command(@command_options)
-      if result.empty?
-        puts 'Nothing'
-      else
-        puts result
-      end
+      result = command(@command_options)
+      Mimir::View::Result.new(result).render() unless result.empty?
     end
 
     def locate_usage_file(file)
