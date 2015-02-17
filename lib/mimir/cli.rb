@@ -27,15 +27,11 @@ module Mimir
       end
       # Try to execute the command otherwise.
       if @commands.include?(ARGV[0])
-        # command = ARGV.shift
-        command = ARGV[0]
+        Mimir::Command.new(ARGV).run
       else
         puts @usage
         exit 1
       end
-      Mimir::Command.new(ARGV).run
-      # command_file = File.join( File.dirname(__FILE__), 'commands', command, 'cmd.rb')
-      # system(['ruby', '-Ilib', command_file, ARGV].join(' '))
     end
 
     def get_commands()

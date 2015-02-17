@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = Mimir::VERSION
   spec.authors       = ["Oleg «Eleidan» Kulyk"]
   spec.email         = ["helh.saintman@gmail.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
+  spec.summary       = %q{Introspection utility for Ruby language.}
   spec.description   = %q{TODO: Write a longer description. Optional.}
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/eleidan/mimir"
   spec.license       = "GPL-3"
 
   spec.files         = `git ls-files -z`.split("\x0")

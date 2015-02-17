@@ -7,7 +7,7 @@ module Mimir
   class Command
     attr_reader :command_options, :usage_content
     def initialize(args)
-      @command = args[0]
+      @command_name = args[0]
       @location = locate_myself()
       @usage_file_path = ''
       @command_file_path = dispatch()
@@ -16,13 +16,17 @@ module Mimir
       locate_usage_file(@command_file_path)
       render_usage()
       parse_options()
-      # system((['ruby', '-Ilib', dispatch, ARGV].join(' ')))
-
-      # yield @command_options, @usage_content if block_given?
     end
+
     def run
+      result = Hash.new
       require @command_file_path
-      # eval("#{@command}(@command_options)")
+      command(@command_options)
+      if result.empty?
+        puts 'Nothing'
+      else
+        puts result
+      end
     end
 
     def locate_usage_file(file)
@@ -38,7 +42,7 @@ module Mimir
 
 
     def locate_command_file
-      File.join(@location, %W(commands #{@command} cmd.rb))
+      File.join(@location, %W(commands #{@command_name} cmd.rb))
     end
 
     def dispatch
