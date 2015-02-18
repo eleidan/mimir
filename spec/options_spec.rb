@@ -20,19 +20,18 @@ module Mimir
 
     describe '#parse' do
       let(:usage)   { "Usage: mimir --fix" }
-      let(:options) { Mimir::Options.new(usage) }
 
       context 'with proper option' do
+        let(:options) { Mimir::Options.new(usage, {argv: '--fix'}) }
         it 'should parse all the options and arguments' do
-          ARGV[0] = '--fix'
           options.parse
           expect(options.result).to eq({'--fix' => true})
         end
       end
 
       context 'with not recognized option' do
+        let(:options) { Mimir::Options.new(usage, {argv: '--ask'}) }
         it 'should print usage and exit' do
-          ARGV[0] = '--ask'
           expect {options.parse}.to (output(/Usage:/).to_stdout).and raise_exception SystemExit
         end
       end
