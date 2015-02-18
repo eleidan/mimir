@@ -39,10 +39,9 @@ module Mimir
 
     describe '#skip_false_options' do
       let(:usage)   { "Usage: mimir -q | -s" }
-      let(:options) { Mimir::Options.new(usage) }
+      let(:options) { Mimir::Options.new(usage, {argv: '-q'}) }
 
       it 'should remove false options' do
-        ARGV[0] = '-q'
         options.parse
         options.skip_false_options
         expect(options.result).to eq({'-q' => true})
@@ -51,10 +50,9 @@ module Mimir
 
     describe '#skip_empty_arguments' do
       let(:usage)   { "Usage: mimir -f [<var>]" }
-      let(:options) { Mimir::Options.new(usage) }
+      let(:options) { Mimir::Options.new(usage, {argv: '-f'}) }
 
       it 'should remove empty arguments' do
-        ARGV[0] = '-f'
         options.parse
         options.skip_false_options
         expect(options.result).to eq({'-f' => true})
