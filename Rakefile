@@ -30,9 +30,10 @@ namespace :mimir do
   end
 
   def save_commands(commands, file)
-    require 'json'
     File.open(file, 'w') do |f|
-      f.puts(JSON.generate(commands))
+      commands.each_pair do |command, desc|
+        f.puts("#{command} ::: #{desc}")
+      end
     end
   end
 
@@ -41,7 +42,7 @@ namespace :mimir do
     commands_file_pattern = File.join(%w{lib mimir commands ** usage.erb})
     files = Dir.glob(commands_file_pattern)
     commands = get_commands(files)
-    commands_file_name = File.join(%w{lib mimir commands commands.json})
+    commands_file_name = File.join(%w{lib mimir commands commands.txt})
     save_commands(commands, commands_file_name)
   end
 end

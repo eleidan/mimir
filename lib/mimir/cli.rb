@@ -1,5 +1,4 @@
 # coding: utf-8
-require 'json'
 require_relative 'version'
 require_relative 'command'
 require_relative 'view/usage'
@@ -35,10 +34,15 @@ module Mimir
     end
 
     def get_commands()
-      commands_file_name = File.join(File.dirname(__FILE__), %w{commands commands.json})
+      commands_file_name = File.join(File.dirname(__FILE__), %w{commands commands.txt})
       begin
-        commands_json = File.read(commands_file_name)
-        JSON.parse(commands_json)
+        result = {}
+        lines = File.readlines(commands_file_name)
+        lines.each do |line|
+          cmd, desc = line.split(':::')
+          result[cmd.strip] = desc.strip
+        end
+        result
       rescue => e
         puts e.message
       end
