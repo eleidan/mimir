@@ -1,9 +1,10 @@
 # coding: utf-8
 require 'docopt'
-require_relative 'version'
+# require_relative 'version'
 
 module Mimir
   class Options
+    attr_reader   :options, :usage, :result
     def initialize(usage, options={})
       defaults = {argv: ARGV, help: true}
       @options = defaults.merge(options)
