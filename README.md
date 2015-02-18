@@ -1,4 +1,4 @@
-# Mimir
+# Mimir [![Code Climate](https://codeclimate.com/github/eleidan/mimir/badges/gpa.svg)](https://codeclimate.com/github/eleidan/mimir)
 
 TODO: Write a gem description
 
