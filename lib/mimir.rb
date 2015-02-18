@@ -1,5 +1,2 @@
 require "mimir/version"
-
-module Mimir
-  # Your code goes here...
-end
+require "mimir/cli"

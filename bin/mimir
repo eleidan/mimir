@@ -4,4 +4,4 @@
 require 'mimir'
 require 'mimir/cli'
 
-Mimir::CLI.new(ARGV).run
+Mimir::CLI.new.run
