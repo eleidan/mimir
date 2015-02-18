@@ -1,6 +1,5 @@
 # coding: utf-8
 require 'docopt'
-# require_relative 'version'
 
 module Mimir
   class Options
@@ -24,18 +23,17 @@ module Mimir
       @result
     end
 
-    def self.get_option(options, option)
-      options[option] if options.has_key?(option)
-    end
 
-
-  private
     def skip_false_options()
       @result.reject! {|k,v| v === false}
     end
 
     def skip_empty_arguments()
       @result.reject! {|k,v| v === nil}
+    end
+
+    def self.get_option(options, option)
+      options[option] if options.has_key?(option)
     end
   end
 end

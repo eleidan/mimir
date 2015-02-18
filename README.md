@@ -1,5 +1,8 @@
-# Mimir [![Code Climate](https://codeclimate.com/github/eleidan/mimir/badges/gpa.svg)](https://codeclimate.com/github/eleidan/mimir)
+[![Code Climate](https://codeclimate.com/github/eleidan/mimir/badges/gpa.svg)](https://codeclimate.com/github/eleidan/mimir)
+[![Test Coverage](https://codeclimate.com/github/eleidan/mimir/badges/coverage.svg)](https://codeclimate.com/github/eleidan/mimir)
+[![Build Status](https://travis-ci.org/eleidan/mimir.svg)](https://travis-ci.org/eleidan/mimir)
 
+# Mimir
 TODO: Write a gem description
 
 ## Installation

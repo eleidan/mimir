@@ -5,86 +5,70 @@ module Mimir
     describe '#new' do
       let(:usage)   { "Usage: mimir [--help] | [--version]" }
       let(:options) { Mimir::Options.new(usage) }
+
       it 'should not return nil' do
         expect(options).not_to be nil
       end
       it 'should set attributes properly' do
-        expect(options.options).to     be_an_instance_of(Hash)
-        expect(options.options).not_to be_empty
-        expect(options.usage).to       be_an_instance_of(String)
-        expect(options.usage).to       eq(usage)
+        expect(options.options).to      be_an_instance_of(Hash)
+        expect(options.options).not_to  be_empty
+        expect(options.usage).to        be_an_instance_of(String)
+        expect(options.usage).to        eq(usage)
+        expect(options.result).to       be_an_instance_of(Hash).and be_empty
       end
     end # new
 
-    # describe '::get_commands' do
-    #   context 'without argument, reading real data' do
-    #     before do
-    #       @result = Mimir::CLI::get_commands
-    #     end
-    #     it 'should not return nil' do
-    #       expect(@result).not_to  be nil
-    #     end
-    #     it 'should return a Hash object' do
-    #       expect(@result).to      be_an_instance_of(Hash)
-    #     end
-    #     it 'should not return empty hash' do
-    #       expect(@result).not_to  be_empty
-    #     end
-    #   end
-    #
-    #   context 'with an argument, reading fake data' do
-    #     before do
-    #       file_name = File.join(File.dirname(__FILE__), 'commands.txt')
-    #       @result   = Mimir::CLI::get_commands(file_name)
-    #       @commands = { 'ace'   => 'Description of ace', \
-    #                     'base'  => 'Description of base' }
-    #     end
-    #     it 'should not return nil' do
-    #       expect(@result).not_to  be nil
-    #     end
-    #     it 'should return a Hash object' do
-    #       expect(@result).to      be_an_instance_of(Hash)
-    #     end
-    #     it 'should return particular set of commands' do
-    #       expect(@result).to      eq(@commands)
-    #     end
-    #   end
-    #
-    #   context 'with not existing file' do
-    #     before do
-    #       file_name = File.join(File.dirname(__FILE__), 'commands.txt')
-    #     end
-    #     it 'should complain' do
-    #       expect{Mimir::CLI::get_commands(@file_name)}.to  raise_exception
-    #     end
-    #   end
-    # end # get_commands
-    #
-    # describe '#run' do
-    #   let(:fake_output) { double('fake_output').as_null_object }
-    #   let(:cli)         { Mimir::CLI.new(fake_output) }
-    #
-    #   context 'when application is issued without any argument' do
-    #     it 'should print help and exit' do
-    #       expect(fake_output).to receive(:puts).with(/Introspection utility/)
-    #       expect{cli.run}.to raise_error SystemExit
-    #     end
-    #   end
-    #
-    #   context 'when application is issued without any supported argument' do
-    #     it 'should print help and exit' do
-    #       expect(fake_output).to receive(:puts).with(/Introspection utility/)
-    #       expect{cli.run}.to raise_error SystemExit
-    #     end
-    #   end
-    #
-    #   context 'when application is issued with "--version" option' do
-    #     it 'should print application version and exit' do
-    #       ARGV[0] = '--version'
-    #       expect(fake_output).to receive(:puts).with(Mimir::VERSION)
-    #       expect{cli.run}.to raise_error SystemExit
-    #     end
-    #   end
-    # end # run
+    describe '#parse' do
+      let(:usage)   { "Usage: mimir --fix" }
+      let(:options) { Mimir::Options.new(usage) }
+
+      context 'with proper option' do
+        it 'should parse all the options and arguments' do
+          ARGV[0] = '--fix'
+          options.parse
+          expect(options.result).to eq({'--fix' => true})
+        end
+      end
+
+      context 'with not recognized option' do
+        it 'should print usage and exit' do
+          ARGV[0] = '--ask'
+          expect {options.parse}.to (output(/Usage:/).to_stdout).and raise_exception SystemExit
+        end
+      end
+    end # parse
+
+    describe '#skip_false_options' do
+      let(:usage)   { "Usage: mimir -q | -s" }
+      let(:options) { Mimir::Options.new(usage) }
+
+      it 'should remove false options' do
+        ARGV[0] = '-q'
+        options.parse
+        options.skip_false_options
+        expect(options.result).to eq({'-q' => true})
+      end
+    end # skip_false_options
+
+    describe '#skip_empty_arguments' do
+      let(:usage)   { "Usage: mimir -f [<var>]" }
+      let(:options) { Mimir::Options.new(usage) }
+
+      it 'should remove empty arguments' do
+        ARGV[0] = '-f'
+        options.parse
+        options.skip_false_options
+        expect(options.result).to eq({'-f' => true})
+      end
+    end # skip_empty_arguments
+
+    describe '::get_option' do
+      it 'should return option value, if exists' do
+        opts  = {'free' => 'bird'}
+        opt   = 'free'
+        expect(Mimir::Options::get_option(opts, opt)).to eq('bird')
+      end
+    end # skip_empty_arguments
+
   end
 end
