@@ -1,4 +1,4 @@
-require 'mimir/services'
+require 'mimir/services/help'
 
 include Mimir::Services
 
