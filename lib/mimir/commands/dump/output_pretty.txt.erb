@@ -1,15 +1,22 @@
-<% values.each_pair do |klass, scopes| -%>
-==============================================================================
-  <%=klass.center(74).rstrip %>
-  --------------------------------------------------------------------------
-
-<% scopes.each_pair do |scope, methods| -%>
-  <%=scope %> [<%=methods.size %>]
-  -------------------------
-<% methods.each do |method| -%>
-     <%=method %>
+<% values.each_pair do |klass, groups| -%>
+================================================================================
+  <%=klass.center(76).rstrip %>
+  ----------------------------------------------------------------------------
+<% groups.each_pair do |group, scopes| -%>
+    <%="#{group}".center(72).rstrip %>
+    ------------------------------------------------------------------------
+<% scopes.each_pair do |scope, contexts| -%>
+<% contexts.each_key do |context| -%>
+      <%=context.strip.center(32)-%>
+<% end %>
+<%=contexts[contexts.keys[0]].size.to_s.rjust(7)-%>
+ <%=scope.strip.center(64,'-') -%>
+ <%=contexts[contexts.keys[1]].size.to_s %>
+<% ([contexts[contexts.keys[0]].size, contexts[contexts.keys[1]].size].max).times do |i|-%>
+          <%="%-34s" % contexts[contexts.keys[0]][i] -%> <%=contexts[contexts.keys[1]][i] %>
 <% end -%>
 
 <% end -%>
 <% end -%>
-==============================================================================
+<% end -%>
+================================================================================

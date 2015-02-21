@@ -1,9 +1,12 @@
-<% values.each_pair do |klass, scopes| -%>
+<% values.each_pair do |klass, groups| -%>
 <%=klass %>
-<% scopes.each_pair do |scope, methods| -%>
-  <%=scope %> [<%=methods.size %>]
-<% methods.each do |method| -%>
-    - <%=method %>
+<% groups.each_pair do |group, scopes| -%>
+<% scopes.each_pair do |scope, contexts| -%>
+<% contexts.each_pair do |context, methods| -%>
+<% if methods.size > 0 -%>
+<%= "#{context} #{scope} methods [#{methods.size}]: #{methods.join(', ')}"%>
+<% end -%>
+<% end -%>
 <% end -%>
 <% end -%>
 <% end -%>
