@@ -22,7 +22,7 @@ module Mimir
     # Class related methods
     def get_methods(cls)
       return {} unless valid?(cls)
-      puts obj = get_instance(cls)
+      obj = get_instance(cls)
       result = {
         'public'  => {
           'class'     => get_class_public_methods(cls),

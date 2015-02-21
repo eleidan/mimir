@@ -7,6 +7,7 @@ module Mimir
   class Command
     # attr_reader :command_options, :usage_content
     def initialize(args)
+      @argv = args
       @command_name = args[0]
       @location = locate_myself()
       @usage_file_path = ''
@@ -37,7 +38,8 @@ module Mimir
     end
 
     def parse_options
-      @command_options = Mimir::Options.new(@usage_content).parse()
+      puts '>>>>'
+      @command_options = Mimir::Options.new(@usage_content,{argv: @argv}).parse()
     end
 
 

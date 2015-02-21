@@ -5,10 +5,9 @@ require_relative 'view/usage'
 
 module Mimir
   class CLI
-    attr_reader   :values, :commands, :usage
-    attr_accessor :stdout
-    def initialize(stdout=STDOUT)
-      @stdout = stdout
+    attr_reader   :values, :commands, :usage, :argv
+    def initialize(argv=ARGV)
+      @argv   = argv
       @values = {}
       @values[:program]  = 'mimir'
       @values[:commands] = Mimir::CLI::get_commands()
@@ -19,20 +18,20 @@ module Mimir
 
     def run
       # Print version and exit
-      if ARGV[0] == '--version'
-        @stdout.puts VERSION
+      if @argv[0] == '--version'
+        puts Mimir::VERSION
         exit 0
       end
       # Print help and exit
-      if ARGV.empty? or ARGV[0] == '--help'
-        @stdout.puts @usage
+      if @argv.empty? or @argv[0] == '--help'
+        puts @usage
         exit 0
       end
       # Try to execute the command otherwise.
-      if @commands.include?(ARGV[0])
-        Mimir::Command.new(ARGV).run
+      if @commands.include?(@argv[0])
+        Mimir::Command.new(@argv).run
       else
-        @stdout.puts @usage
+        puts @usage
         exit 1
       end
     end
