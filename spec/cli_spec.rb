@@ -61,11 +61,10 @@ module Mimir
       end
 
       context 'with not existing file' do
-        before do
-          file_name = File.join(File.dirname(__FILE__), 'commands.txt')
-        end
         it 'should complain' do
-          expect{Mimir::CLI::get_commands(@file_name)}.to  raise_exception
+          expect(File.exist?('fake.file')).to  eq false
+          expect {Mimir::CLI::get_commands('fake.file')}.to \
+                                                    raise_exception SystemExit
         end
       end
     end # get_commands

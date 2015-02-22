@@ -5,8 +5,10 @@ require_relative 'options'
 
 module Mimir
   class Command
-    # attr_reader :command_options, :usage_content
+    attr_reader :location, :command_name, :command_options, :command_file, \
+                :usage_file_path, :usage_content
     def initialize(args)
+      raise ArgumentError unless args.instance_of?(Array)
       @argv = args
       @command_name = args[0]
       @location = locate_myself()
@@ -15,17 +17,22 @@ module Mimir
       @command_options = {}
       locate_command_path
       locate_command_file
-      locate_usage_file(@command_file_path)
-      render_usage()
-      parse_options()
+      locate_usage_file @command_file_path
+      render_usage
+      parse_options
     end
 
-    def run
-      require @command_file
-      options = {path: @command_file_path}
-      result = command(@command_options)
-      # TODO: Use proper exception, test this moment
-      raise 'NOT A HASH!' unless result.is_a?(Hash)
+    def run(cmd='')
+      result = {}
+      if cmd.empty?
+        require @command_file
+        options = {path: @command_file_path}
+        result = command(@command_options)
+      # For testing
+      elsif cmd.instance_of?(String)
+        result = eval(cmd)
+      end
+      raise 'The result of the command is not a Hash!' unless result.instance_of?(Hash)
       options.merge!(result)
       Mimir::View::Result.new(options).render() unless result.empty?
     end
@@ -38,7 +45,6 @@ module Mimir
     end
 
     def parse_options
-      puts '>>>>'
       @command_options = Mimir::Options.new(@usage_content,{argv: @argv}).parse()
     end
 
@@ -48,10 +54,6 @@ module Mimir
     end
     def locate_command_path
       @command_file_path = File.join(@location, %W(commands #{@command_name}))
-    end
-
-    def dispatch
-      locate_command_file
     end
 
   private
