@@ -26,6 +26,48 @@ module Mimir
       end
     end # new
 
+    describe '#run' do
+      context 'when application is issued without any argument' do
+        let(:cli)         { Mimir::CLI.new([]) }
+        it 'should print help and exit' do
+          expect {cli.run}.to (output(/Introspection utility/).to_stdout)\
+                    .and raise_exception SystemExit
+        end
+      end
+
+      context 'when application is issued without any supported argument' do
+        let(:cli)         { Mimir::CLI.new(['--fake']) }
+        it 'should print help and exit' do
+          expect {cli.run}.to (output(/Introspection utility/).to_stdout)\
+                    .and raise_exception SystemExit
+        end
+      end
+
+      context 'when application is issued with "--version" option' do
+        let(:cli)         { Mimir::CLI.new(['--version']) }
+        it 'should print application version and exit' do
+          expect {cli.run}.to (output(/#{Mimir::VERSION}/).to_stdout)\
+                    .and raise_exception SystemExit
+        end
+      end
+
+      context 'when application is issued with "dump" command' do
+        let(:cli)         { Mimir::CLI.new(['dump']) }
+        it 'should print usage for the command and exit' do
+          expect {cli.run}.to \
+                    (output(/mimir dump/).to_stdout)\
+                    .and raise_exception SystemExit
+        end
+      end
+
+      context 'when application is issued with "dump Hash" command' do
+        let(:cli)         { Mimir::CLI.new(%w{dump Hash}) }
+        it 'should print help for the command and exit' do
+          expect {cli.run}.to output(/Hash/).to_stdout
+        end
+      end
+    end # run
+
     describe '::get_commands' do
       context 'without argument, reading real data' do
         before do
@@ -68,47 +110,5 @@ module Mimir
         end
       end
     end # get_commands
-
-    describe '#run' do
-      context 'when application is issued without any argument' do
-        let(:cli)         { Mimir::CLI.new }
-        it 'should print help and exit' do
-          expect {cli.run}.to (output(/Introspection utility/).to_stdout)\
-                    .and raise_exception SystemExit
-        end
-      end
-
-      context 'when application is issued without any supported argument' do
-        let(:cli)         { Mimir::CLI.new(['--fake']) }
-        it 'should print help and exit' do
-          expect {cli.run}.to (output(/Introspection utility/).to_stdout)\
-                    .and raise_exception SystemExit
-        end
-      end
-
-      context 'when application is issued with "--version" option' do
-        let(:cli)         { Mimir::CLI.new(['--version']) }
-        it 'should print application version and exit' do
-          expect {cli.run}.to (output(/#{Mimir::VERSION}/).to_stdout)\
-                    .and raise_exception SystemExit
-        end
-      end
-
-      context 'when application is issued with "dump" command' do
-        let(:cli)         { Mimir::CLI.new(['dump']) }
-        it 'should print usage for the command and exit' do
-          expect {cli.run}.to \
-                    (output(/mimir dump/).to_stdout)\
-                    .and raise_exception SystemExit
-        end
-      end
-
-      context 'when application is issued with "dump Hash" command' do
-        let(:cli)         { Mimir::CLI.new(%w{dump Hash}) }
-        it 'should print help for the command and exit' do
-          expect {cli.run}.to output(/Hash/).to_stdout
-        end
-      end
-    end # run
   end
 end

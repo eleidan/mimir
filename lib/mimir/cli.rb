@@ -41,7 +41,6 @@ module Mimir
                                       %w{commands commands.txt}) \
                               : file
       result = {}
-      puts file_name
       begin
         lines = File.readlines(file_name)
         lines.each do |line|
@@ -49,8 +48,7 @@ module Mimir
           result[cmd.strip] = desc.strip
         end
       rescue => e
-        STDERR.puts "Error while reading the list of availabe commands: %" \
-                      % e.message
+        STDERR.puts "Error while reading the list of availabe commands"
         exit 1
       end
 
