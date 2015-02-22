@@ -2,7 +2,7 @@ require 'json'
 require_relative 'base'
 
 module Mimir
-  module View
+  module Views
 
     class JsonView < Base
       def initialize(params={})

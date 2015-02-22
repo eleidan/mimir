@@ -2,33 +2,30 @@
 require_relative 'base'
 
 module Mimir
-  module View
+  module Views
 
     class Result < Base
       def initialize(params={})
         super
+        get_renderer
       end
 
-      def render
-        result = case @options['--format']
-        when 'json'
-          render_json
-        else
-          render_plain
-        end
-        puts result
+      def render()
+        puts @renderer.render
       end
 
     private
-      def render_json
-        require_relative 'jsonview'
-        Mimir::View::JsonView.new(@options).render
+      def get_renderer
+        @renderer = case @options['--format']
+        when 'json'
+          require_relative 'jsonview'
+          Mimir::Views::JsonView.new(@options)
+        else
+          require_relative 'plain'
+          Mimir::Views::Plain.new(@options)
+        end
       end
-      def render_plain
-        require_relative 'plain'
-        Mimir::View::Plain.new(@options).render
-      end
-    end
+    end # Result
 
   end
 end

@@ -34,7 +34,7 @@ module Mimir
           expect(File.exist?(cmd.usage_file_path)).to eq true
           expect(File.exist?(cmd.command_file)).to    eq true
 
-          expect(cmd.usage_content).to    match /Get list of all objects/
+          expect(cmd.usage_content).to    match(/Get list of all objects/)
           expect(cmd.command_options).to  eq({"dump"=>true, "<class>"=>"Hash"})
         end
       end

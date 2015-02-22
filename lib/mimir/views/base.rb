@@ -2,11 +2,12 @@
 require 'erb'
 
 module Mimir
-  module View
+  module Views
 
     class Base
       attr_reader :values
       def initialize(params={})
+        raise ArgumentError unless params.instance_of?(Hash)
         defaults  = {'--format' => 'plain'}
         defaults.store('--pretty', 'false')
         @options  = defaults.merge(params)

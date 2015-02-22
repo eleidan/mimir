@@ -1,6 +1,6 @@
 # coding: utf-8
-require_relative 'view/usage'
-require_relative 'view/result'
+require_relative 'views/usage'
+require_relative 'views/result'
 require_relative 'options'
 
 module Mimir
@@ -34,14 +34,14 @@ module Mimir
       end
       raise 'The result of the command is not a Hash!' unless result.instance_of?(Hash)
       options.merge!(result)
-      Mimir::View::Result.new(options).render() unless result.empty?
+      Mimir::Views::Result.new(options).render() unless result.empty?
     end
 
     def locate_usage_file(file)
       @usage_file_path = File.join(@command_file_path, 'usage.erb')
     end
     def render_usage
-      @usage_content = Mimir::View::Usage.new(file: @usage_file_path).render()
+      @usage_content = Mimir::Views::Usage.new(file: @usage_file_path).render()
     end
 
     def parse_options

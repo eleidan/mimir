@@ -2,7 +2,7 @@
 require_relative 'base'
 
 module Mimir
-  module View
+  module Views
 
     class Plain < Base
       def initialize(params={})

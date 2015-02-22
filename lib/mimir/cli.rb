@@ -1,7 +1,7 @@
 # coding: utf-8
 require_relative 'version'
 require_relative 'command'
-require_relative 'view/usage'
+require_relative 'views/usage'
 
 module Mimir
   class CLI
@@ -12,7 +12,7 @@ module Mimir
       @values[:program]  = 'mimir'
       @values[:commands] = Mimir::CLI::get_commands()
       @commands = values[:commands].keys().sort()
-      @usage    = Mimir::View::Usage.new(@values).render()
+      @usage    = Mimir::Views::Usage.new(@values).render()
       self
     end
 
