@@ -2,7 +2,7 @@ require 'spec_helper'
 
 module Mimir
   # describe Views::Result do
-  describe Views::Result, :focus do
+  describe Views::Result do
     describe '#new' do
       shared_examples 'a good boy' do
         it 'does not complain at all' do
