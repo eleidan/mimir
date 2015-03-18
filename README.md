@@ -44,3 +44,6 @@ The application is tested with the following Ruby versions:
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create a new Pull Request
+
+## License
+[GNU General Public License, version 3](http://www.gnu.org/licenses/gpl-3.0.html)
