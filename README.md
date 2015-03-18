@@ -3,25 +3,39 @@
 [![Build Status](https://travis-ci.org/eleidan/mimir.svg)](https://travis-ci.org/eleidan/mimir)
 
 # Mimir
-TODO: Write a gem description
-
-## Installation
-
-Add this line to your application's Gemfile:
-
-    gem 'mimir'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install mimir
+Introspection utility for Ruby language.
 
 ## Usage
+NOTE: The application is under heavy development, so there is no gem file yet.
 
-TODO: Write usage instructions here
+Once the application's repository is obtained, it is possible to give it a try.
+Go into the application's directory and issue the following command:
+```
+ruby -Ilib bin/mimir
+```
+As a result, the following output or similar is expected:
+```
+Introspection utility for Ruby language.
+
+Usage:
+  mimir [command] [options]
+  mimir help <command>
+  mimir --help
+  mimir --version
+
+Commands:
+  dump              Get list of all objects in provided class.
+  help              Print information about the command use.
+
+Options:
+      --help        Show this help end exit.
+      --version     Show application version end exit.
+```
+
+## Supported Ruby Versions
+The application is tested with the following Ruby versions:
+- Ruby 2.1.0
+- Ruby 2.2.0
 
 ## Contributing
 
