@@ -5,9 +5,9 @@ Feature: help command
   information about particular command by specifying
   command name as an agrument for the help command.
 
-    Scenario Outline: help command does the same as
+    Scenario Outline: issue command
       When I run <command>
-      Then the <output> should be the same as for <help command>
+      Then I get particular first line of the result <output>
 
       Scenarios: help command with options
         | command                 | output                                    |
