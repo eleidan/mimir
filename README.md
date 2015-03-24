@@ -1,8 +1,9 @@
+# Mimir
 [![Code Climate](https://codeclimate.com/github/eleidan/mimir/badges/gpa.svg)](https://codeclimate.com/github/eleidan/mimir)
 [![Test Coverage](https://codeclimate.com/github/eleidan/mimir/badges/coverage.svg)](https://codeclimate.com/github/eleidan/mimir)
 [![Build Status](https://travis-ci.org/eleidan/mimir.svg)](https://travis-ci.org/eleidan/mimir)
+[![security](https://hakiri.io/github/eleidan/mimir/master.svg)](https://hakiri.io/github/eleidan/mimir/master)
 
-# Mimir
 Introspection utility for Ruby language.
 
 ## Usage
@@ -34,8 +35,8 @@ Options:
 
 ## Supported Ruby Versions
 The application is tested with the following Ruby versions:
-- Ruby 2.1.0
-- Ruby 2.2.0
+- MRI 2.1.0
+- MRI 2.2.0
 
 ## Contributing
 
