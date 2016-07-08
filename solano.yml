@@ -1,0 +1,8 @@
+notify:
+- channel: email
+  message: "%build-url% testing of %commit%:%commit-message% %repo%'s %branch% branch finished in %duration% with %error-count% error(s) and %passed-count% success(es)\nStatus: %status%."
+  recipients: committers
+
+- channel: hipchat
+  room: eleidan-test
+  message: "@releasemanager, %build-url% testing of %commit%:%commit-message% %repo%'s %branch% branch finished in %duration% with %error-count% error(s) and %passed-count% success(es)\nStatus: %status%."
