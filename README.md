@@ -7,8 +7,6 @@
 Introspection utility for Ruby language.
 
 ## Usage
-NOTE: The application is under heavy development, so there is no gem file yet.
-
 Once the application's repository is obtained, it is possible to give it a try.
 Go into the application's directory and issue the following command:
 ```
